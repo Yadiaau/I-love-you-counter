@@ -18,7 +18,7 @@ class Croissant:
         self.canvas = tk.Canvas(root, highlightthickness=0, bg="white")
         self.canvas.pack(fill=tk.BOTH, expand=True)
 
-        self.counter_label = tk.Label(self.canvas, text="0", font=("Arial", 48, "bold"), bg="white", fg="#FF1493")
+        self.counter_label = tk.Label(self.canvas, text="0", font=("Arial", 48, "bold"), bg="white", fg="#F8B2C1")
         self.counter_window = self.canvas.create_window(0,0, window = self.counter_label)
 
         self.heart_canvas = tk.Canvas(self.canvas, width= 200, height= 200, bg = "white", highlightthickness=0)
@@ -27,6 +27,15 @@ class Croissant:
         self.heart = self.heart_canvas.create_oval(50, 80, 150, 180, fill = self.heart_color, outline="")
         self.heart_text=""
         self.heart_canvas.create_text(100, 130, text="", font=("Arial", 16, "bold"), fill="white")
-        
+
+        menubar = tk.Menu(root)
+        root.config(menu=menubar)
+        file_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="File", menu=file_menu)
+        file_menu.add_command(label="Set Background", command=self.set_background)
+        file_menu.add_command(label="Set Background Color", command=self.set_bg_color)
+        file_menu.add_command(label="Fullscreen = <F11>", command=self.toggle_fullscreen)
+
+
 
          
