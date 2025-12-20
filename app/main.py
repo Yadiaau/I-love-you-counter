@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog
+from tkinter import filedialog, colorchooser
 import os
 
 class Croissant: 
@@ -41,53 +41,52 @@ class Croissant:
         self.root.bind("<Configure>", self.on_resize)
         self.on_resize()
 
-        def set_background(self):
-            path = filedialog.askopenfilename(filetypes=[("PNG Files","*.png")])
-            if path:
-                try: 
-                    self.bg_photo=tk.PhotoImage(file=path)
-                    self.canvas.delete("bg")
-                    self.canvas.create_image(0,0,image=self.bg_photo, anchore=tk.NW, tags="bg")
-                    self.canvas.tag_lower("bg")
-                except:
-                    print("Error Loading This Pudding")
+    def set_background(self):
+        path = filedialog.askopenfilename(filetypes=[("PNG Files","*.png")])
+        if path:
+            try: 
+                self.bg_photo=tk.PhotoImage(file=path)
+                self.canvas.delete("bg")
+                self.canvas.create_image(0,0,image=self.bg_photo, anchore=tk.NW, tags="bg")
+                self.canvas.tag_lower("bg")
+            except:
+                print("Error Loading This Pudding")
             
-        def set_bg_color(self):
-            from tkinter import colorchooser
-            color = colorchooser.askcolor(title="Choose Wisely")
-            if color[1]: 
-                self.canvas.config(bg=color[1])
+    def set_bg_color(self):
+        color = colorchooser.askcolor(title="Choose Wisely")
+        if color[1]: 
+            self.canvas.config(bg=color[1])
 
-        def on_resize(self, event=None): 
-            w=self.canvas.winfo_width()
-            h=self.canvas.winfo_height()
-            if w>1 and h>1: 
-                self.canvas.cords(self.counter_window,w//2, h//4)
-                self.canvas.cords(self.heart_window,w//2, h//2)
+    def on_resize(self, event=None): 
+        w=self.canvas.winfo_width()
+        h=self.canvas.winfo_height()
+        if w>1 and h>1: 
+            self.canvas.cords(self.counter_window,w//2, h//4)
+            self.canvas.cords(self.heart_window,w//2, h//2)
 
-        def on_click(self, event):
-            self.count+= 1  
-            self.counter_label.config(text=str(self.count))
-            color=self.dark_color if not self.is_dark else self.dark_color
-            self.heart_canvas.itemconfig(self.heart, fill=color)
-            self.is_dark = not self.is_dark
+    def on_click(self, event):
+        self.count+= 1  
+        self.counter_label.config(text=str(self.count))
+        color=self.dark_color if not self.is_dark else self.dark_color
+        self.heart_canvas.itemconfig(self.heart, fill=color)
+        self.is_dark = not self.is_dark
 
-            self.heart_canvas.itemconfig(self.heart_text, text="I LOVE YOU")
+        self.heart_canvas.itemconfig(self.heart_text, text="I LOVE YOU")
 
-            if self.timer: 
-                self.root.after_cancel(self.timer)
-            self.timer = self.root.after(200, self.reset_counter)
+        if self.timer: 
+            self.root.after_cancel(self.timer)
+        self.timer = self.root.after(200, self.reset_counter)
         
 
-        def reset_counter(self):
-            self.count = 0
-            self.counter_label.config(text="0")
-            self.heart_canvas.itemconfig(self.heart_text, text="")
-            self.heart_canvas.itemconfig(self.heart, fill=self.heart_color)
-            self.is_dark=False
+    def reset_counter(self):
+        self.count = 0
+        self.counter_label.config(text="0")
+        self.heart_canvas.itemconfig(self.heart_text, text="")
+        self.heart_canvas.itemconfig(self.heart, fill=self.heart_color)
+        self.is_dark=False
             
-        def toggle_fullscreen(self):
-            self.root.attributes("-fullscreen", not self.root.attributes("-fullscreen"))
+    def toggle_fullscreen(self):
+        self.root.attributes("-fullscreen", not self.root.attributes("-fullscreen"))
 
 if __name__ == "__main__":
     root = tk.Tk()
