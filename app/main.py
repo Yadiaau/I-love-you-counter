@@ -51,6 +51,13 @@ class Croissant:
                     self.canvas.tag_lower("bg")
                 except:
                     print("Error Loading This Pudding")
+            
+        def set_bg_color(self):
+            from tkinter import colorchooser
+            color = colorchooser.askcolor(title="Choose Wisely")
+            if color[1]: 
+                selfxcanvasxconfig(bg=color[1])
+            
                 
 
 
