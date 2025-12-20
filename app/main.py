@@ -8,8 +8,8 @@ class Croissant:
         self.root.title ("I love you couter") 
         self.root.geometry ("800x600")
 
-        self.count
-        self.timer 
+        self.count = 0
+        self.timer = None
         self.heart_color ="#FFD1DC" 
         self.dark_color = "#F8B2C1"
         self.is_dark = False
