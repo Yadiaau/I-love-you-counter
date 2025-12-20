@@ -56,7 +56,8 @@ class Croissant:
             from tkinter import colorchooser
             color = colorchooser.askcolor(title="Choose Wisely")
             if color[1]: 
-                self.canvas.config(bg=color[1s])
+                self.canvas.config(bg=color[1])
+                
 
         
             
