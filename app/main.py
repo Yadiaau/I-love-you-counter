@@ -61,8 +61,8 @@ class Croissant:
         w=self.canvas.winfo_width()
         h=self.canvas.winfo_height()
         if w>1 and h>1: 
-            self.canvas.cords(self.counter_window,w//2, h//4)
-            self.canvas.cords(self.heart_window,w//2, h//2)
+            self.canvas.coords(self.counter_window,w//2, h//4)
+            self.canvas.coords(self.heart_window,w//2, h//2)
 
     def on_click(self, event):
         self.count+= 1  
