@@ -36,6 +36,22 @@ class Croissant:
         file_menu.add_command(label="Set Background Color", command=self.set_bg_color)
         file_menu.add_command(label="Fullscreen = <F11>", command=self.toggle_fullscreen)
         
+        self.heart_canvas.bind("<Button-1>", self.on_heart_click)
+        self.root.bind("<F11>", lambda e: self.toggle_fullscreen())
+        self.root.bind("<Configure>", self.on_resize)
+        self.on_resize()
+
+        def set_background(self):
+            path = filedialog.askopenfilename(filetypes=[("PNG Files","*.png")])
+            if path:
+                try: 
+                    self.bg_photo=tk.PhotoImage(file=path)
+                    self.canvas.delete("bg")
+                    self.canvas.create_image(0,0,image=self.bg_photo, anchore=tk.NW, tags="bg")
+                    self.canvas.tag_lower("bg")
+                except:
+                    print("Error Loading This Pudding")
+                
 
 
 
