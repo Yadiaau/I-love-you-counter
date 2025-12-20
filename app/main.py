@@ -65,6 +65,38 @@ class Croissant:
                 self.canvas.cords(self.counter_window,w//2, h//4)
                 self.canvas.cords(self.heart_window,w//2, h//2)
 
+        def on_click(self, event):
+            self.count+= 1  
+            self.counter_label.config(text=str(self.count))
+            color=self.dark_color if not self.is_dark else self.dark_color
+            self.heart_canvas.itemconfig(self.heart, fill=color)
+            self.is_dark = not self.is_dark
+
+            self.heart_canvas.itemconfig(self.heart_text, text="I LOVE YOU")
+
+            if self.timer: 
+                self.root.after_cancel(self.timer)
+            self.timer = self.root.after(200, self.reset_counter)
+        
+
+        def reset_counter(self):
+            self.count = 0
+            self.counter_label.config(text="0")
+            self.heart_canvas.itemconfig(self.heart_text, text="")
+            self.heart_canvas.itemconfig(self.heart, fill=self.heart_color)
+            self.is_dark=False
+            
+        def toggle_fullscreen(self):
+            self.root.attributes("-fullscreen", not self.root.attributes("-fullscreen"))
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = Croissant(root)
+    root.mainloop()
+    
+
+        
+
 
                 
 
