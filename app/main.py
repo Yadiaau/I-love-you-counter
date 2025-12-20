@@ -36,7 +36,7 @@ class Croissant:
         file_menu.add_command(label="Set Background Color", command=self.set_bg_color)
         file_menu.add_command(label="Fullscreen = <F11>", command=self.toggle_fullscreen)
         
-        self.heart_canvas.bind("<Button-1>", self.on_heart_click)
+        self.heart_canvas.bind("<Button-1>", self.on_click)
         self.root.bind("<F11>", lambda e: self.toggle_fullscreen())
         self.root.bind("<Configure>", self.on_resize)
         self.on_resize()
